@@ -46,5 +46,6 @@ playerMaxAcc = 2;
 playerMaxDec = 2;
 playerAccRate = 0.020;
 playerDecRate = 0.090;
+moveDir = 0;
 
 global.camera_target = self.id;

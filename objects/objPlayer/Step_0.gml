@@ -3,6 +3,7 @@ var _vertical_move = keyboard_check( vk_down ) - keyboard_check( vk_up );
 var _movespd = point_distance( 0, 0, _horizontal_move, _vertical_move ) * playerMoveSpd;
 
 if ( playerCurrentMoveSpd ) {
+	playerLookAngle = rotate( playerLookAngle, playerCurrentMoveDir, 3.50 );
     playerAcc = lerp( playerAcc, playerMaxAcc, playerAccRate );
 }
 else {
@@ -11,9 +12,6 @@ else {
 	
 playerCurrentMoveDir = point_direction( 0, 0, _horizontal_move, _vertical_move );
 playerCurrentMoveSpd = min( 1, _movespd );
-
-playerMoveDir = point_direction( x, y, _horizontal_move, _vertical_move );
-playerLookAngle = point_direction( x, y, mouse_x, mouse_y );
 
 // Movement
 playerCurrentMoveSpdX += dcos( playerCurrentMoveDir );
@@ -70,6 +68,7 @@ if ( playerCurrentWeapon != unarmed ) {
     if ( mouse_check_button_pressed( mb_right ) ) {
         playerSprite = sprShooterAimPistol;
         playerAnimIndex = 0;
+        playerLookAngle = point_direction( x, y, mouse_x, mouse_y );
     }
     
     if ( mouse_check_button( mb_right ) ) {
@@ -77,6 +76,7 @@ if ( playerCurrentWeapon != unarmed ) {
             playerAnimIndex += 0.35;
             playerSprintSpd = playerSprintSpd * 0.40;
             playerCurrentState = state.aiming;
+            playerLookAngle = point_direction( x, y, mouse_x, mouse_y );
         }
     }
     else {
@@ -99,6 +99,7 @@ if ( playerCurrentWeapon != unarmed ) {
 
 switch( playerCurrentState ) {
     case state.aiming :
+    	playerLookAngle = point_direction( x, y, mouse_x, mouse_y );
         playerSprintSpd = 0.40;
         break;
     default :

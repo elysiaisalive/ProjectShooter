@@ -17,6 +17,6 @@ var str = playerHolsteredWeapon ? playerHolsteredWeapon.wepName : "None";
 var str2 = playerCurrentWeapon ? playerCurrentWeapon.wepName : "None";
 
 draw_text( x, y, str );
-draw_text( x, y + 20, playerCurrentState );
+draw_text( x, y + 20, $"{playerMoveDir}" );
 
-draw_sprite( sprCursor, -1, ~~mouse_x, ~~mouse_y );
+draw_sprite( sprCursor, -1, ~~mouse_x*1, ~~mouse_y*1 );
