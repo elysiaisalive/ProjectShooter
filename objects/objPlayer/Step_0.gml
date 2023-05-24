@@ -17,6 +17,8 @@ playerCurrentMoveSpd = min( 1, _movespd );
 playerCurrentMoveSpdX += dcos( playerCurrentMoveDir );
 playerCurrentMoveSpdY -= dsin( playerCurrentMoveDir );
 
+playerLegDir = rotate( playerLookAngle, point_direction( x, y, playerCurrentMoveSpdX, playerCurrentMoveSpdY ), 3.85 );
+
 if ( place_free( x + playerCurrentMoveSpdX, y ) ) {
 	x += lengthdir_x( playerCurrentMoveSpd * playerSprintSpd * playerAcc, playerCurrentMoveDir );
 }
@@ -33,9 +35,7 @@ if ( keyboard_check( vk_shift ) ) {
 if ( playerCurrentMoveSpd ) {
     playerLegIndex += playerCurrentMoveSpd * 0.25;
     
-    if ( playerSprite != sprShooterWalkPistol 
-    || playerSprite != sprShooterAimPistol
-    || playerSprite != string_pos( "Aim", asset_get_index( playerSprite ) ) ) {
+    if ( playerSprite != sprShooterAimPistol ) {
         playerAnimIndex += playerCurrentMoveSpd * 0.10;
     }
     
@@ -68,7 +68,6 @@ if ( playerCurrentWeapon != unarmed ) {
     if ( mouse_check_button_pressed( mb_right ) ) {
         playerSprite = sprShooterAimPistol;
         playerAnimIndex = 0;
-        playerLookAngle = point_direction( x, y, mouse_x, mouse_y );
     }
     
     if ( mouse_check_button( mb_right ) ) {
@@ -76,7 +75,6 @@ if ( playerCurrentWeapon != unarmed ) {
             playerAnimIndex += 0.35;
             playerSprintSpd = playerSprintSpd * 0.40;
             playerCurrentState = state.aiming;
-            playerLookAngle = point_direction( x, y, mouse_x, mouse_y );
         }
     }
     else {
@@ -99,8 +97,15 @@ if ( playerCurrentWeapon != unarmed ) {
 
 switch( playerCurrentState ) {
     case state.aiming :
-    	playerLookAngle = point_direction( x, y, mouse_x, mouse_y );
+		playerLookAngle = rotate_to( playerLookAngle, point_direction( x, y, mouse_x, mouse_y ), 0.85 );
+    	playerAnimSpd = 0;
         playerSprintSpd = 0.40;
+        
+        if ( mouse_check_button_pressed( mb_left ) ) {
+        	var inst = instance_create_depth( x, y, depth, objBullet );
+        	inst.spd = 8;
+        	inst.direction = playerLookAngle;
+        }
         break;
     default :
         playerSprintSpd = 1;

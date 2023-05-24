@@ -12,7 +12,7 @@ unarmed.wepSprite = sprShooterWalk;
 pistol = new cWeapon();
 pistol.wepName = "Pistol";
 pistol.wepAmmo = 12;
-pistol.wepFireRate = 1 / 60;
+pistol.wepFireRate = 60 / 25;
 pistol.wepSprite = sprShooterWalkPistol;
 
 playerSprite = sprShooterWalk;
@@ -23,6 +23,7 @@ playerMoveSpd = 2.50;
 playerMoveFrc = 0.75;
 playerMoveDir = 0;
 playerLookAngle = 0;
+playerLegDir = 0;
 
 playerRollTime = 2 / 60;
 playerRollDirection = 0;

@@ -38,6 +38,7 @@
   "resources": [
     {"id":{"name":"sprGrass","path":"sprites/sprGrass/sprGrass.yy",},},
     {"id":{"name":"objClipSolid","path":"objects/objClipSolid/objClipSolid.yy",},},
+    {"id":{"name":"objBullet","path":"objects/objBullet/objBullet.yy",},"order":0,},
     {"id":{"name":"sprClipSolid","path":"sprites/sprClipSolid/sprClipSolid.yy",},},
     {"id":{"name":"sprShooterAimPistol","path":"sprites/sprShooterAimPistol/sprShooterAimPistol.yy",},},
     {"id":{"name":"sprShooterHoldAimPistol","path":"sprites/sprShooterHoldAimPistol/sprShooterHoldAimPistol.yy",},},
