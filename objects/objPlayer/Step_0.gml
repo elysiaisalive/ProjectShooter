@@ -2,8 +2,12 @@ var _horizontal_move = keyboard_check( vk_right ) - keyboard_check( vk_left );
 var _vertical_move = keyboard_check( vk_down ) - keyboard_check( vk_up );
 var _movespd = point_distance( 0, 0, _horizontal_move, _vertical_move ) * playerMoveSpd;
 
+if ( playerCurrentState != state.aiming ) {
+	playerLookAngle = rotate( playerLookAngle, playerLastMoveDir, 3.50 );
+}
+
 if ( playerCurrentMoveSpd ) {
-	playerLookAngle = rotate( playerLookAngle, playerCurrentMoveDir, 3.50 );
+	playerLastMoveDir = playerCurrentMoveDir;
     playerAcc = lerp( playerAcc, playerMaxAcc, playerAccRate );
 }
 else {
@@ -98,6 +102,7 @@ if ( playerCurrentWeapon != unarmed ) {
 switch( playerCurrentState ) {
     case state.aiming :
 		playerLookAngle = rotate_to( playerLookAngle, point_direction( x, y, mouse_x, mouse_y ), 0.85 );
+		playerLastMoveDir = playerLookAngle;
     	playerAnimSpd = 0;
         playerSprintSpd = 0.40;
         

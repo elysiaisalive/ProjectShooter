@@ -22,6 +22,7 @@ playerLegIndex = 0;
 playerMoveSpd = 2.50;
 playerMoveFrc = 0.75;
 playerMoveDir = 0;
+playerLastMoveDir = playerMoveDir;
 playerLookAngle = 0;
 playerLegDir = 0;
 
